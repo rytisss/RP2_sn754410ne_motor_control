@@ -55,31 +55,3 @@ class SN754410NE_motor:
     def stop_instant(self) -> None:
         self.__pin_backward_pwm.duty_u16(0)
         self.__pin_forward_pwm.duty_u16(0)
-
-
-# setup motor control pins and initialize class
-motor = SN754410NE_motor(backward_pin=16, forward_pin=17)
-
-# while True:
-#     motor.forward(35)
-#     time.sleep_ms(3000)
-#     motor.stop_instant()
-#     time.sleep_ms(500)
-#     motor.backward(35)
-#     time.sleep_ms(3000)
-#     motor.stop_instant()
-#     time.sleep_ms(500)
-    
-# # For the tests
-# while True:
-#     for duty_p in range(0,100):
-#         duty = percent_to_rp_duty(duty_p)
-#         print(duty)
-#         pin_backward_pwm.duty_u16(duty)
-#         time.sleep_ms(10)
-#         
-#     for duty_p in range(100,0, -1):
-#         duty = percent_to_rp_duty(duty_p)
-#         print(duty)
-#         pin_backward_pwm.duty_u16(duty)
-#         time.sleep_ms(10)
