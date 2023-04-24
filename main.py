@@ -51,7 +51,7 @@ def webpage(output_state, encoder_pulses):
     html = f"""
             <!DOCTYPE html>
             <html>
-			<p>Motor control</p>
+            <p>Motor control</p>
             <form action="./motor_forward">
             <input type="submit" value="Motor Spin Forward" />
             </form>
@@ -61,9 +61,9 @@ def webpage(output_state, encoder_pulses):
             <form action="./stop_motor">
             <input type="submit" value="Stop Motor" />
             </form>
-			<p>Encoder Pulses = <b>{encoder_pulses}</b></p>
-			<p>Output Control [now - <b>{output_state}</b>]</p>
-			<form action="./toggle_output">
+            <p>Encoder Pulses = <b>{encoder_pulses}</b></p>
+            <p>Output Control [now - <b>{output_state}</b>]</p>
+            <form action="./toggle_output">
             <input type="submit" value="Toggle Output" />
             </form>
             </body>
@@ -79,8 +79,6 @@ def serve(connection):
     #Start a web server
     output_state = 'OFF'
     while True:
-        # read encoder
-        encoder_pulses = encoder.value()
         # do client connection handling
         client = connection.accept()[0]
         request = client.recv(1024)
@@ -102,6 +100,8 @@ def serve(connection):
         elif request =='/toggle_output?':
             output_pin.toggle()
             output_state = 'ON' if output_pin.value() else 'OFF'
+        # read encoder
+        encoder_pulses = encoder.value()
         html = webpage(output_state, encoder_pulses)
         client.send(html)
         client.close()
